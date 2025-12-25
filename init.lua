@@ -358,6 +358,10 @@ require('lazy').setup({
         { '<leader>pv', desc = 'Open file explorer (netrw)' },
         { '<leader>g', group = '[G]it' },
         { '<leader>gg', desc = 'Open Lazygit' },
+        { '<leader>a', group = '[A]dd', mode = { 'v' } },
+        { '<leader>at', desc = 'Add Tag', mode = { 'v' } },
+        { '<leader>r', group = '[R]emove', mode = { 'v' } },
+        { '<leader>rt', desc = 'Remove Tag', mode = { 'v' } },
       },
     },
   },
@@ -907,6 +911,7 @@ require('lazy').setup({
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'tokyonight-night'
+      vim.g.semantic_tokens = true
     end,
   },
 
@@ -956,7 +961,25 @@ require('lazy').setup({
     -- main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'zsh',
+        'c',
+        'diff',
+        'javascript',
+        'typescript',
+        'html',
+        'css',
+        'json',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'query',
+        'vim',
+        'vimdoc',
+        'go',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -968,6 +991,33 @@ require('lazy').setup({
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
+    config = function()
+      -- force Tree-sitter to attach to every buffer
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = {
+          'bash',
+          'zsh',
+          'c',
+          'diff',
+          'javascript',
+          'typescript',
+          'html',
+          'css',
+          'json',
+          'lua',
+          'luadoc',
+          'markdown',
+          'markdown_inline',
+          'query',
+          'vim',
+          'vimdoc',
+          'go',
+        },
+        callback = function()
+          vim.treesitter.start()
+        end,
+      })
+    end,
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
     --
