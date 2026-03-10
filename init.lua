@@ -358,10 +358,21 @@ require('lazy').setup({
         { '<leader>pv', desc = 'Open file explorer (netrw)' },
         { '<leader>g', group = '[G]it' },
         { '<leader>gg', desc = 'Open Lazygit' },
-        { '<leader>a', group = '[A]dd', mode = { 'v' } },
-        { '<leader>at', desc = 'Add Tag', mode = { 'v' } },
-        { '<leader>r', group = '[R]emove', mode = { 'v' } },
-        { '<leader>rt', desc = 'Remove Tag', mode = { 'v' } },
+        { '<leader>T', group = 'Golang [T]ag', mode = { 'v' } },
+        { '<leader>Ta', desc = '[T]ag [A]dd', mode = { 'v' } },
+        { '<leader>Tr', desc = '[T]ag [R]emove', mode = { 'v' } },
+        { '<leader>F', group = '[F]lutter', mode = { 'n' } },
+        { '<leader>Fc', desc = 'Telescope Commands', mode = { 'n' } },
+        { '<leader>Fd', desc = 'Devices', mode = { 'n' } },
+        { '<leader>FD', desc = 'Dev Tools', mode = { 'n' } },
+        { '<leader>Fe', desc = 'Emulators', mode = { 'n' } },
+        { '<leader>Fl', desc = 'LSP Restart', mode = { 'n' } },
+        { '<leader>Fn', desc = 'Rename & Update', mode = { 'n' } },
+        { '<leader>Fr', desc = 'Hot Reload', mode = { 'n' } },
+        { '<leader>FR', desc = 'Hot Restart', mode = { 'n' } },
+        { '<leader>Fs', desc = 'Go to Super Class', mode = { 'n' } },
+        { '<leader>Fq', desc = 'Quit', mode = { 'n' } },
+        { '<leader>Fx', desc = 'Run', mode = { 'n' } },
       },
     },
   },
@@ -434,6 +445,8 @@ require('lazy').setup({
           },
         },
       }
+
+      require('telescope').load_extension 'flutter'
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')

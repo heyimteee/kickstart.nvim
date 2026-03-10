@@ -5,12 +5,12 @@ return {
       skip_private = true,
     }
 
-    vim.keymap.set('v', '<leader>at', ':AddGoTags<CR>', {
+    vim.keymap.set('v', '<leader>Ta', ':AddGoTags<CR>', {
       desc = 'Add Go struct tags',
       silent = true,
     })
 
-    vim.keymap.set('v', '<leader>rt', ':RemoveGoTags<CR>', {
+    vim.keymap.set('v', '<leader>Tr', ':RemoveGoTags<CR>', {
       desc = 'Remove Go struct tags',
       silent = true,
     })
