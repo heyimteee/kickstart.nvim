@@ -104,7 +104,7 @@ vim.g.have_nerd_font = true
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
-
+--
 -- Make line numbers default
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -963,15 +963,18 @@ require('lazy').setup({
     opts = {
       ensure_installed = {
         'bash',
-        'zsh',
         'c',
         'diff',
         'javascript',
+        'php',
         'typescript',
         'html',
         'css',
         'json',
+        'python',
+        'xml',
         'lua',
+        'tsx',
         'luadoc',
         'markdown',
         'markdown_inline',
@@ -996,16 +999,19 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('FileType', {
         pattern = {
           'bash',
-          'zsh',
           'c',
           'diff',
           'javascript',
+          'php',
           'typescript',
           'html',
           'css',
           'json',
+          'python',
+          'xml',
           'lua',
           'luadoc',
+          'tsx',
           'markdown',
           'markdown_inline',
           'query',
