@@ -46,7 +46,7 @@ return {
       map('n', '<leader>FD', '<cmd>FlutterDevTools<cr>', { desc = 'Flutter: Dev Tools' })
       map('n', '<leader>Fe', '<cmd>FlutterEmulators<cr>', { desc = 'Flutter: Emulators' })
       map('n', '<leader>Fl', '<cmd>FlutterLspRestart<cr>', { desc = 'Flutter: LSP Restart' })
-      map('n', '<leader>FL', '<cmd>FlutterToggleLog<cr>', { desc = 'Flutter: Toggle Log' })
+      map('n', '<leader>FL', '<cmd>FlutterLogToggle<cr>', { desc = 'Flutter: Toggle Log' })
       map('n', '<leader>Fn', '<cmd>FlutterRename<cr>', { desc = 'Flutter: Rename' })
       map('n', '<leader>Fr', '<cmd>FlutterReload<cr>', { desc = 'Flutter: Hot Reload' })
       map('n', '<leader>FR', '<cmd>FlutterRestart<cr>', { desc = 'Flutter: Hot Restart' })
