@@ -156,8 +156,12 @@ vim.o.splitbelow = true
 --  It is very similar to `vim.o` but offers an interface for conveniently interacting with tables.
 --   See `:help lua-options`
 --   and `:help lua-options-guide`
+vim.opt.tabstop = 4 -- Number of spaces a tab counts for
+vim.opt.softtabstop = 4 -- Number of spaces a tab counts for while editing
+vim.opt.shiftwidth = 4 -- Size of an indent
+vim.opt.expandtab = true
 vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '| ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
@@ -712,6 +716,29 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        vtsls = {
+          on_attach = function(client, bufnr)
+            client.server_capabilities.semanticTokensProvider = nil
+          end,
+          settings = {
+            typescript = {
+              updateImportsOnRename = 'always',
+              suggest = { completeFunctionCalls = true },
+            },
+            javascript = {
+              updateImportsOnRename = 'always',
+              suggest = { completeFunctionCalls = true },
+            },
+          },
+        },
+
+        tailwindcss = {},
+
+        eslint = {
+          settings = {
+            workingDirectory = { mode = 'auto' },
+          },
+        },
 
         lua_ls = {
           -- cmd = { ... },
@@ -977,18 +1004,22 @@ require('lazy').setup({
     opts = {
       ensure_installed = {
         'bash',
+        'zsh',
         'c',
         'diff',
         'javascript',
         'php',
         'typescript',
         'html',
+        'html_tags',
         'css',
         'json',
         'python',
         'xml',
         'lua',
         'tsx',
+        'jsx',
+        'vue',
         'luadoc',
         'markdown',
         'markdown_inline',
@@ -1013,12 +1044,14 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('FileType', {
         pattern = {
           'bash',
+          'zsh',
           'c',
           'diff',
           'javascript',
           'php',
           'typescript',
           'html',
+          'html_tags',
           'css',
           'json',
           'python',
@@ -1026,6 +1059,8 @@ require('lazy').setup({
           'lua',
           'luadoc',
           'tsx',
+          'jsx',
+          'vue',
           'markdown',
           'markdown_inline',
           'query',
@@ -1095,3 +1130,28 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+-- Extract colors from the current Tokyonight theme
+local colors = require('tokyonight.colors').setup()
+
+-- Force TSX to use Tokyonight's preferred syntax mapping
+local highlights = {
+  -- div, h1, a (Standard HTML)
+  ['@tag.builtin.tsx'] = { link = 'Tag' },
+  ['tsxIntrinsicTagName'] = { link = 'Tag' },
+
+  -- <CustomComponent /> (React Components)
+  ['@tag.tsx'] = { link = 'Function' },
+  ['tsxTagName'] = { link = 'Function' },
+
+  -- className, href, onClick
+  ['@tag.attribute.tsx'] = { link = 'Label' }, -- Standard Tokyonight yellow/orange
+
+  -- <, >, /, and { }
+  ['@tag.delimiter.tsx'] = { link = 'Delimiter' },
+  ['@punctuation.bracket'] = { link = 'Delimiter' },
+}
+
+for group, opts in pairs(highlights) do
+  vim.api.nvim_set_hl(0, group, opts)
+end

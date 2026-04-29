@@ -3,6 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  require 'custom.plugins.copilot',
   {
     'kdheepak/lazygit.nvim',
     lazy = true,
