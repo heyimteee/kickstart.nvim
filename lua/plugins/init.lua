@@ -23,7 +23,7 @@ return {
   require 'plugins.coding.lsp',
   require 'plugins.coding.completion',
   require 'plugins.coding.formatting',
-  -- require 'plugins.coding.linting',       -- DISABLED: enable when you need linting
+  require 'plugins.coding.linting',
 
   -- [[ Language-specific ]]
   require 'plugins.lang.dart',
@@ -31,6 +31,7 @@ return {
   require 'plugins.lang.lua',
   require 'plugins.lang.markdown',
   require 'plugins.lang.typescript',
+  require 'plugins.lang.vue',
 
   -- [[ Tools ]]
   require 'plugins.tools.copilot',

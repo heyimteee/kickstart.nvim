@@ -74,6 +74,22 @@ The `{ import = 'path' }` syntax works but hides which plugins are loaded — yo
 
 The TSX highlight overrides depend on TokyoNight being loaded and colors set. Putting them in the colorscheme config guarantees they run after the theme is applied.
 
+### Why ESLint diagnostics come from the LSP, not nvim-lint?
+
+The `eslint` LSP server provides richer diagnostics (code actions, quickfixes, per-line ignore) than the standalone linting pipeline. nvim-lint is reserved for filetypes without an LSP-based linter (e.g. Markdown via `markdownlint`).
+
+### Why prettierd instead of prettier?
+
+`prettierd` runs as a background daemon, making format-on-save nearly instant compared to spawning a new Node.js process for every save. Mason auto-installs it.
+
+### Why gofumpt for Go?
+
+`gofumpt` is a strict superset of `gofmt` — it produces more deterministic formatting (e.g. grouping imports, aligning fields). It's the standard choice in modern Go projects.
+
+### Why mason-lspconfig auto-installs LSPs, not mason-tool-installer?
+
+`mason-tool-installer` expects bare **Mason package names** (e.g. `vue-language-server`), while the `servers` table uses **lspconfig names** (e.g. `volar`). These rarely match. `mason-lspconfig` maintains the internal mapping between the two, so we pass lspconfig names to it instead. `mason-tool-installer` is reserved for non-LSP tools (stylua, prettierd, gofumpt) whose Mason names are trivial.
+
 ## When You Want to Change Something
 
 | You want to... | Edit this file |

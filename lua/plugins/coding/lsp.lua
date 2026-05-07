@@ -1,5 +1,7 @@
 -- LSP (Language Server Protocol) setup with Mason for automatic server installation.
--- Configures servers for TypeScript, Tailwind, ESLint, and Lua.
+--
+-- Servers configured: vtsls (TS/JS), volar (Vue), emmet_ls (HTML/CSS/JSX abbreviations),
+--   tailwindcss, eslint, cssls (CSS/SCSS), lua_ls, gopls (Go).
 -- LSP-attached keymaps are all under the `gr` prefix (goto references).
 
 return {
@@ -102,6 +104,7 @@ return {
     -- LSP servers to install and configure.
     -- Add or remove entries here — Mason installs them and lspconfig wires them up.
     local servers = {
+      -- TypeScript / JavaScript — React, Next.js, Node.js
       vtsls = {
         on_attach = function(client, bufnr)
           client.server_capabilities.semanticTokensProvider = nil
@@ -117,12 +120,31 @@ return {
           },
         },
       },
+
+      -- Vue 3 Single File Components
+      volar = {
+        filetypes = { 'vue' },
+      },
+
+      -- Emmet completions for HTML, CSS, SCSS, JSX (React), Vue
+      emmet_ls = {
+        filetypes = { 'css', 'scss', 'html', 'javascriptreact', 'typescriptreact', 'vue' },
+      },
+
+      -- Tailwind CSS IntelliSense (class completion, hover preview)
       tailwindcss = {},
+
+      -- ESLint diagnostics (errors/warnings inline from your eslint config)
       eslint = {
         settings = {
           workingDirectory = { mode = 'auto' },
         },
       },
+
+      -- CSS/SCSS autocomplete and validation
+      cssls = {},
+
+      -- Lua (Neovim config, plugins)
       lua_ls = {
         settings = {
           Lua = {
@@ -132,23 +154,34 @@ return {
           },
         },
       },
+
+      -- Go (gopls — the official Go language server)
+      gopls = {},
     }
 
-    -- Ensure every server + Stylua is installed via Mason
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, { 'stylua' })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
-    -- Wire up servers to lspconfig with our capabilities merged in
+    -- mason-lspconfig handles LSP server auto-install — it knows the lspconfig → Mason
+    -- package name mapping (e.g. 'volar' → 'vue-language-server').
+    -- Pass all our server names here so Mason installs them automatically.
+    local lsp_servers = vim.tbl_keys(servers or {})
     require('mason-lspconfig').setup {
-      ensure_installed = {},
-      automatic_installation = false,
+      ensure_installed = lsp_servers,
+      automatic_installation = true,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
           server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
           require('lspconfig')[server_name].setup(server)
         end,
+      },
+    }
+
+    -- mason-tool-installer handles non-LSP tools (formatters).
+    -- These are Mason package names, not lspconfig names.
+    require('mason-tool-installer').setup {
+      ensure_installed = {
+        'stylua', -- Lua formatter
+        'prettierd', -- JS/TS/Vue/CSS formatter (daemon, faster than prettier)
+        'gofumpt', -- Go formatter (stricter than gofmt)
       },
     }
   end,

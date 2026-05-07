@@ -6,16 +6,19 @@ Personal Neovim setup — modular, maintainable, and built for the long haul. Or
 
 - **Neovim** >= 0.10
 - **git**, **make**, **unzip**, **ripgrep** (`rg`)
+- **Node.js** >= 18 (for vtsls, volar, eslint, emmet, tailwindcss, prettierd LSPs/formatters)
 - A **Nerd Font** (optional, but icons will be broken without one)
 
 ## Quick Start
 
 ```bash
 # The first time you open Neovim, lazy.nvim will clone itself, then install all plugins.
+# Mason will auto-install LSP servers and formatters.
 nvim
 ```
 
 Run `:checkhealth personal-config` to verify your system is ready.
+Run `:Mason` to see installed/available LSP servers and tools.
 
 ## What's Inside
 
@@ -23,10 +26,10 @@ Run `:checkhealth personal-config` to verify your system is ready.
 |----------|-------------|
 | **Editor** | Indentation, autopairs, surround, text-objects, comment highlighting |
 | **UI** | TokyoNight colorscheme, neo-tree sidebar, mini.statusline, which-key hints |
-| **Coding** | LSP (ts, eslint, tailwind, lua), blink.cmp autocompletion, conform.nvim formatting |
-| **Languages** | Dart/Flutter, Go, Lua, Markdown, TypeScript |
+| **Coding** | LSP (ts, vue, emmet, tailwind, eslint, css, lua, go), blink.cmp autocompletion, conform.nvim formatting (prettierd, gofumpt, stylua), markdown linting |
+| **Languages** | Vue.js, React/Next.js (TSX), Dart/Flutter, Go, Lua, Markdown, TypeScript |
 | **Tools** | Telescope, gitsigns, LazyGit, GitHub Copilot, DAP debugging (disabled) |
-| **Syntax** | Treesitter with 25+ language parsers |
+| **Syntax** | Treesitter with 25+ language parsers (vue, tsx, jsx, scss, etc.) |
 
 ## Directory Map
 

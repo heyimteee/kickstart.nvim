@@ -1,4 +1,7 @@
--- TypeScript/TSX — TSX highlight tuning is handled by the colorscheme config
--- (see plugins/ui/colorscheme.lua). This file is reserved for TS-specific tooling.
--- Currently empty; add typescript-tools.nvim or other TS plugins here.
+-- TypeScript / JSX — React, Next.js, and general TS development.
+-- vtsls LSP handles type checking and autocomplete (see plugins/coding/lsp.lua).
+-- eslint LSP handles linting inline. emmet_ls provides JSX abbreviations.
+-- prettierd formats on save.
+-- TSX highlight tuning is handled by the colorscheme config (see plugins/ui/colorscheme.lua).
+
 return {}

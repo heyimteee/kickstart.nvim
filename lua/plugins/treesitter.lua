@@ -7,7 +7,7 @@ return {
   opts = {
     ensure_installed = {
       'bash', 'zsh', 'c', 'diff', 'javascript', 'php', 'typescript',
-      'html', 'html_tags', 'css', 'json', 'python', 'xml',
+      'html', 'html_tags', 'css', 'scss', 'json', 'python', 'xml',
       'lua', 'luadoc', 'tsx', 'jsx', 'vue',
       'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'go',
     },
@@ -24,7 +24,7 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = {
         'bash', 'zsh', 'c', 'diff', 'javascript', 'php', 'typescript',
-        'html', 'html_tags', 'css', 'json', 'python', 'xml',
+        'html', 'html_tags', 'css', 'scss', 'json', 'python', 'xml',
         'lua', 'luadoc', 'tsx', 'jsx', 'vue',
         'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'go',
       },

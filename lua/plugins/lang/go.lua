@@ -1,7 +1,9 @@
--- Go struct tag management.
--- In visual mode: <leader>Ta to add tags, <leader>Tr to remove them.
+-- Go development. gopls LSP provides type checking and autocomplete (see plugins/coding/lsp.lua).
+-- gofumpt formats on save (stricter than gofmt).
 
 return {
+  -- Go struct tag management.
+  -- In visual mode: <leader>Ta adds tags, <leader>Tr removes them.
   'romus204/go-tagger.nvim',
   config = function()
     require('go-tagger').setup {

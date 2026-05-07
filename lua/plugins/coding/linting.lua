@@ -1,5 +1,7 @@
--- Linting via nvim-lint. DISABLED by default — uncomment the import in
--- lua/plugins/init.lua to enable.
+-- Linting via nvim-lint.
+-- ESLint diagnostics are handled by the ESLint LSP server (see lsp.lua) for
+-- JS/TS/JSX/TSX/Vue — no need to duplicate here.
+-- This handles linting for filetypes without an LSP-based linter.
 
 return {
   {

@@ -1,5 +1,7 @@
 -- Auto-format on save via conform.nvim.
--- Format manually with <leader>f. Stylua formats Lua buffers.
+-- Format manually with <leader>f.
+-- Stylua formats Lua; prettierd formats JS/TS/JSX/TSX/Vue/CSS/SCSS/JSON/HTML/Markdown;
+-- gofumpt formats Go.
 
 return {
   'stevearc/conform.nvim',
@@ -31,6 +33,17 @@ return {
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
+      javascript = { 'prettierd' },
+      typescript = { 'prettierd' },
+      javascriptreact = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
+      vue = { 'prettierd' },
+      css = { 'prettierd' },
+      scss = { 'prettierd' },
+      json = { 'prettierd' },
+      html = { 'prettierd' },
+      markdown = { 'prettierd' },
+      go = { 'gofumpt' },
     },
   },
 }
