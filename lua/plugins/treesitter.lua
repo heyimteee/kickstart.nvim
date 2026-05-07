@@ -6,10 +6,10 @@ return {
   build = ':TSUpdate',
   opts = {
     ensure_installed = {
-      'bash', 'zsh', 'c', 'diff', 'javascript', 'php', 'typescript',
-      'html', 'html_tags', 'css', 'scss', 'json', 'python', 'xml',
-      'lua', 'luadoc', 'tsx', 'jsx', 'vue',
-      'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'go',
+      'bash', 'c', 'diff', 'javascript', 'php', 'typescript',
+      'html', 'css', 'scss', 'json', 'python', 'xml',
+      'lua', 'luadoc', 'tsx', 'vue',
+      'markdown', 'query', 'vim', 'vimdoc', 'go',
     },
     auto_install = true,
     highlight = {
@@ -18,15 +18,21 @@ return {
     },
     indent = { enable = true, disable = { 'ruby' } },
   },
-  config = function()
+  config = function(_, opts)
+    -- CRITICAL: this registers the parsers, enables the highlight module,
+    -- and processes ensure_installed so missing parsers are auto-installed.
+    require('nvim-treesitter.config').setup(opts)
+
     -- Force-attach treesitter to every buffer for the languages we've installed.
     -- This prevents edge cases where a buffer doesn't get highlighting on first open.
+    -- NOTE: patterns below must be actual Vim filetypes, not parser names.
     vim.api.nvim_create_autocmd('FileType', {
       pattern = {
-        'bash', 'zsh', 'c', 'diff', 'javascript', 'php', 'typescript',
-        'html', 'html_tags', 'css', 'scss', 'json', 'python', 'xml',
-        'lua', 'luadoc', 'tsx', 'jsx', 'vue',
-        'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'go',
+        'bash', 'c', 'diff', 'javascript', 'javascriptreact',
+        'php', 'typescript', 'typescriptreact',
+        'html', 'css', 'scss', 'json', 'python', 'xml',
+        'lua', 'luadoc', 'vue',
+        'markdown', 'query', 'vim', 'vimdoc', 'go',
       },
       callback = function()
         vim.treesitter.start()
