@@ -159,13 +159,11 @@ return {
       gopls = {},
     }
 
-    -- mason-lspconfig handles LSP server auto-install — it knows the lspconfig → Mason
-    -- package name mapping (e.g. 'volar' → 'vue-language-server').
-    -- Pass all our server names here so Mason installs them automatically.
-    local lsp_servers = vim.tbl_keys(servers or {})
+    -- Wire up lspconfig with handlers (mason-lspconfig bridges lspconfig → Mason).
+    -- automatic_installation = false because we install via mason-tool-installer below.
     require('mason-lspconfig').setup {
-      ensure_installed = lsp_servers,
-      automatic_installation = true,
+      ensure_installed = {},
+      automatic_installation = false,
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
@@ -175,13 +173,24 @@ return {
       },
     }
 
-    -- mason-tool-installer handles non-LSP tools (formatters).
-    -- These are Mason package names, not lspconfig names.
+    -- Auto-install LSP servers + formatters via mason-tool-installer.
+    -- IMPORTANT: these are Mason package names, NOT lspconfig names.
+    -- e.g. 'vue-language-server' (not 'volar'), 'eslint-lsp' (not 'eslint').
     require('mason-tool-installer').setup {
       ensure_installed = {
-        'stylua', -- Lua formatter
-        'prettierd', -- JS/TS/Vue/CSS formatter (daemon, faster than prettier)
-        'gofumpt', -- Go formatter (stricter than gofmt)
+        -- LSP servers
+        'vue-language-server', -- Volar (Vue)
+        'vtsls', -- TypeScript/JavaScript
+        'emmet-language-server', -- Emmet abbreviations
+        'tailwindcss-language-server', -- Tailwind CSS IntelliSense
+        'eslint-lsp', -- ESLint diagnostics
+        'css-lsp', -- CSS / SCSS
+        'lua-language-server', -- Lua
+        'gopls', -- Go
+        -- Formatters
+        'stylua', -- Lua
+        'prettierd', -- JS/TS/Vue/CSS/JSON/HTML/MD
+        'gofumpt', -- Go
       },
     }
   end,

@@ -86,9 +86,9 @@ The `eslint` LSP server provides richer diagnostics (code actions, quickfixes, p
 
 `gofumpt` is a strict superset of `gofmt` — it produces more deterministic formatting (e.g. grouping imports, aligning fields). It's the standard choice in modern Go projects.
 
-### Why mason-lspconfig auto-installs LSPs, not mason-tool-installer?
+### Why mason-lspconfig only does wiring, not installation?
 
-`mason-tool-installer` expects bare **Mason package names** (e.g. `vue-language-server`), while the `servers` table uses **lspconfig names** (e.g. `volar`). These rarely match. `mason-lspconfig` maintains the internal mapping between the two, so we pass lspconfig names to it instead. `mason-tool-installer` is reserved for non-LSP tools (stylua, prettierd, gofumpt) whose Mason names are trivial.
+`mason-lspconfig` builds its server→package mapping dynamically from the Mason registry. Not all lspconfig servers have registry metadata (e.g. `volar` → `vue-language-server` isn't always mapped). So `ensure_installed` via mason-lspconfig is unreliable. Instead, `mason-tool-installer` handles ALL auto-installation using exact Mason package names — no translation step that can break. `mason-lspconfig` is used purely for its handler that bridges lspconfig ↔ Mason.
 
 ## When You Want to Change Something
 
