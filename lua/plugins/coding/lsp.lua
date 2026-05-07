@@ -166,12 +166,20 @@ return {
 
       -- PHP / Laravel — intelephense provides autocomplete, go-to-definition,
       -- diagnostics, and Laravel facade/model support via IDE Helper stubs.
+--
+-- IMPORTANT: For full Laravel support (facades, models, etc.) you MUST
+-- generate IDE Helper stubs in your project:
+--   composer require --dev barryvdh/laravel-ide-helper
+--   php artisan ide-helper:generate
+--   php artisan ide-helper:models -R
+--   php artisan ide-helper:meta
+--
+-- Without these, intelephense will report false positives like
+-- [[unknown class Illuminate\Support\Facades\Route]].
       intelephense = {
         filetypes = { 'php', 'blade' },
         settings = {
           intelephense = {
-            -- Include Laravel IDE Helper stubs if they exist in the project.
-            -- Generate them with: composer require --dev barryvdh/laravel-ide-helper
             stubs = {
               'apache', 'bcmath', 'bz2', 'calendar', 'com_dotnet', 'Core',
               'ctype', 'curl', 'date', 'dba', 'dom', 'enchant', 'exif',
@@ -184,7 +192,7 @@ return {
               'snmp', 'soap', 'sockets', 'sodium', 'SPL', 'sqlite3', 'standard',
               'superglobals', 'sysvmsg', 'sysvsem', 'sysvshm', 'tidy', 'tokenizer',
               'xml', 'xmlreader', 'xmlrpc', 'xmlwriter', 'xsl', 'Zend OPcache',
-              'zip', 'zlib', 'laravel',
+              'zip', 'zlib',
             },
             files = {
               associations = { '*.php', '*.blade.php' },
