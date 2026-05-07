@@ -1,7 +1,7 @@
 -- Auto-format on save via conform.nvim.
 -- Format manually with <leader>f.
 -- Stylua formats Lua; prettierd formats JS/TS/JSX/TSX/Vue/CSS/SCSS/JSON/HTML/Markdown;
--- gofumpt formats Go.
+-- gofumpt formats Go; php-cs-fixer formats PHP / Laravel.
 
 return {
   'stevearc/conform.nvim',
@@ -44,6 +44,7 @@ return {
       html = { 'prettierd' },
       markdown = { 'prettierd' },
       go = { 'gofumpt' },
+      php = { 'php_cs_fixer' },
     },
   },
 }

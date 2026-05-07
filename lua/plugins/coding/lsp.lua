@@ -1,7 +1,7 @@
 -- LSP (Language Server Protocol) setup with Mason for automatic server installation.
 --
 -- Servers configured: vtsls (TS/JS), volar (Vue), emmet_ls (HTML/CSS/JSX abbreviations),
---   tailwindcss, eslint, cssls (CSS/SCSS), lua_ls, gopls (Go).
+--   tailwindcss, eslint, cssls (CSS/SCSS), lua_ls, gopls (Go), intelephense (PHP/Laravel).
 -- LSP-attached keymaps are all under the `gr` prefix (goto references).
 
 return {
@@ -163,6 +163,49 @@ return {
 
       -- Go (gopls — the official Go language server)
       gopls = {},
+
+      -- PHP / Laravel — intelephense provides autocomplete, go-to-definition,
+      -- diagnostics, and Laravel facade/model support via IDE Helper stubs.
+      intelephense = {
+        filetypes = { 'php', 'blade' },
+        settings = {
+          intelephense = {
+            -- Include Laravel IDE Helper stubs if they exist in the project.
+            -- Generate them with: composer require --dev barryvdh/laravel-ide-helper
+            stubs = {
+              'apache', 'bcmath', 'bz2', 'calendar', 'com_dotnet', 'Core',
+              'ctype', 'curl', 'date', 'dba', 'dom', 'enchant', 'exif',
+              'fileinfo', 'filter', 'fpm', 'ftp', 'gd', 'gettext', 'gmp',
+              'hash', 'iconv', 'imap', 'intl', 'json', 'ldap', 'libxml',
+              'mbstring', 'mcrypt', 'meta', 'mysqli', 'oci8', 'odbc', 'openssl',
+              'pcntl', 'pcre', 'PDO', 'pdo_ibm', 'pdo_mysql', 'pdo_pgsql',
+              'pdo_sqlite', 'pgsql', 'Phar', 'posix', 'pspell', 'readline',
+              'recode', 'Reflection', 'regex', 'session', 'shmop', 'SimpleXML',
+              'snmp', 'soap', 'sockets', 'sodium', 'SPL', 'sqlite3', 'standard',
+              'superglobals', 'sysvmsg', 'sysvsem', 'sysvshm', 'tidy', 'tokenizer',
+              'xml', 'xmlreader', 'xmlrpc', 'xmlwriter', 'xsl', 'Zend OPcache',
+              'zip', 'zlib', 'laravel',
+            },
+            files = {
+              associations = { '*.php', '*.blade.php' },
+              exclude = {
+                '**/.git/**',
+                '**/.svn/**',
+                '**/node_modules/**',
+                '**/vendor/**/{Tests,tests,Test,test}/**/*',
+                '**/.history/**',
+              },
+            },
+            completion = {
+              insertedText = true,
+              triggerParameterHints = true,
+            },
+            format = {
+              enable = false, -- Let conform.nvim / php-cs-fixer handle formatting
+            },
+          },
+        },
+      },
     }
 
     -- Wire up lspconfig with handlers (mason-lspconfig bridges lspconfig → Mason).
@@ -193,10 +236,14 @@ return {
         'css-lsp', -- CSS / SCSS
         'lua-language-server', -- Lua
         'gopls', -- Go
+        'intelephense', -- PHP / Laravel
         -- Formatters
         'stylua', -- Lua
         'prettierd', -- JS/TS/Vue/CSS/JSON/HTML/MD
         'gofumpt', -- Go
+        'php-cs-fixer', -- PHP / Laravel
+        -- Linters
+        'phpstan', -- PHP static analysis
       },
     }
   end,

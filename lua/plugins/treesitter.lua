@@ -8,7 +8,7 @@ return {
     ensure_installed = {
       'bash', 'c', 'diff', 'javascript', 'php', 'typescript',
       'html', 'css', 'scss', 'json', 'python', 'xml',
-      'lua', 'luadoc', 'tsx', 'vue',
+      'lua', 'luadoc', 'tsx', 'vue', 'blade',
       'markdown', 'query', 'vim', 'vimdoc', 'go',
     },
     auto_install = true,
@@ -31,7 +31,7 @@ return {
         'bash', 'c', 'diff', 'javascript', 'javascriptreact',
         'php', 'typescript', 'typescriptreact',
         'html', 'css', 'scss', 'json', 'python', 'xml',
-        'lua', 'luadoc', 'vue',
+        'lua', 'luadoc', 'vue', 'blade',
         'markdown', 'query', 'vim', 'vimdoc', 'go',
       },
       callback = function()

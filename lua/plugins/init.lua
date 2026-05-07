@@ -32,6 +32,7 @@ return {
   require 'plugins.lang.go',
   require 'plugins.lang.lua',
   require 'plugins.lang.markdown',
+  require 'plugins.lang.php',
   require 'plugins.lang.typescript',
   require 'plugins.lang.vue',
 
