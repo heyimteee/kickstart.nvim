@@ -14,7 +14,8 @@ return {
   require 'plugins.editor.textobjects',
 
   -- [[ UI ]]
-  require 'plugins.ui.colorscheme',
+  require 'plugins.ui.colorscheme', -- TokyoNight (default)
+  -- require 'plugins.ui.ayu',       -- Ayu (alternative — disable TokyoNight above first)
   require 'plugins.ui.neo-tree',
   require 'plugins.ui.statusline',
   require 'plugins.ui.which-key',

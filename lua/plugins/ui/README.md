@@ -6,7 +6,8 @@ Visual layer: colorscheme, statusline, file explorer, keybinding hints.
 
 | File | Plugin | Purpose |
 |------|--------|---------|
-| `colorscheme.lua` | tokyonight.nvim | TokyoNight theme + TSX highlight tuning |
+| `colorscheme.lua` | tokyonight.nvim | TokyoNight theme — default colorscheme |
+| `ayu.lua` | neovim-ayu | **DISABLED** — Ayu alternative; uncomment to enable |
 | `neo-tree.lua` | neo-tree.nvim | File-tree sidebar (toggle with `\`) |
 | `statusline.lua` | mini.statusline | Minimal statusline with mode, file, git, position |
 | `which-key.lua` | which-key.nvim | Popup showing pending keybindings |

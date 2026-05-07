@@ -113,10 +113,16 @@ return {
           typescript = {
             updateImportsOnRename = 'always',
             suggest = { completeFunctionCalls = true },
+            preferences = {
+              includeCompletionsWithImport = true, -- Auto-import when accepting completion
+            },
           },
           javascript = {
             updateImportsOnRename = 'always',
             suggest = { completeFunctionCalls = true },
+            preferences = {
+              includeCompletionsWithImport = true,
+            },
           },
         },
       },

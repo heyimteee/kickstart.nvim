@@ -1,4 +1,7 @@
--- TokyoNight colorscheme with transparency and TSX/React highlight tuning.
+-- TokyoNight colorscheme — the default theme.
+-- To switch to Ayu: comment out the require below, enable ayu.lua in init.lua,
+-- then uncomment require in plugins/ui/ayu.lua.
+-- See plugins/ui/ayu.lua for the alternative.
 
 return {
   'folke/tokyonight.nvim',
@@ -12,29 +15,5 @@ return {
     }
 
     vim.cmd.colorscheme 'tokyonight-night'
-    vim.g.semantic_tokens = true
-
-    -- Force TSX/React to use Tokyonight's preferred syntax groups.
-    -- Without this, TSX components inherit generic highlight groups that look off.
-    local highlights = {
-      -- Standard HTML tags (div, h1, a, etc.)
-      ['@tag.builtin.tsx'] = { link = 'Tag' },
-      ['tsxIntrinsicTagName'] = { link = 'Tag' },
-
-      -- React components (<MyComponent />)
-      ['@tag.tsx'] = { link = 'Function' },
-      ['tsxTagName'] = { link = 'Function' },
-
-      -- HTML/JSX attributes (className, onClick, etc.)
-      ['@tag.attribute.tsx'] = { link = 'Label' },
-
-      -- Angle brackets, slashes, curly braces
-      ['@tag.delimiter.tsx'] = { link = 'Delimiter' },
-      ['@punctuation.bracket'] = { link = 'Delimiter' },
-    }
-
-    for group, opts in pairs(highlights) do
-      vim.api.nvim_set_hl(0, group, opts)
-    end
   end,
 }
